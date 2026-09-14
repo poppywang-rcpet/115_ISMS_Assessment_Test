@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>資安 ( ISMS )全中心教育訓練視訊課程學習評量表 - 駭客精靈版</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Retro Arcade, Matrix & Pixel Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&family=Silkscreen:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #00000d;
+      color: #ffffff;
+      font-family: 'Share Tech Mono', 'Noto Sans TC', monospace;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(33, 33, 255, 0.12) 0%, transparent 80%),
+        linear-gradient(0deg, rgba(33, 33, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(33, 33, 255, 0.08) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px, 24px 24px;
+    }
+
+    .font-pixel {
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .font-hacker {
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .font-arcade {
+      font-family: 'Silkscreen', cursive;
+    }
+
+    .maze-border {
+      border: 3px solid #2121ff;
+      box-shadow: 0 0 15px rgba(33, 33, 255, 0.8), inset 0 0 15px rgba(33, 33, 255, 0.3);
+      border-radius: 8px;
+    }
+
+    .arcade-box {
+      background: rgba(5, 5, 25, 0.95);
+      border: 2px solid #2121ff;
+      box-shadow: 0 0 20px rgba(33, 33, 255, 0.4);
+    }
+
+    .crt-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(
+        rgba(0, 0, 15, 0) 50%, 
+        rgba(0, 0, 0, 0.08) 50%
+      ), linear-gradient(
+        90deg,
+        rgba(33, 33, 255, 0.02),
+        transparent,
+        rgba(33, 33, 255, 0.02)
+      );
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    .animate-blink {
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes ghost-float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-6px) scale(1.05); }
+    }
+    .animate-ghost {
+      animation: ghost-float 2s ease-in-out infinite;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #00000d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ffe600;
+      border-radius: 4px;
+      box-shadow: 0 0 10px #ffe600;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ffff;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative selection:bg-yellow-400 selection:text-black p-3 sm:p-6">
+
+  <!-- CRT Screen Effect Overlay -->
+  <div id="crtOverlay" class="crt-overlay hidden"></div>
+
+  <!-- Hidden iframe for silent Google Form submission -->
+  <iframe name="hidden_google_form_iframe" id="hidden_google_form_iframe" style="display:none;"></iframe>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+    
+    <header class="bg-black/90 maze-border p-4 mb-6 relative overflow-hidden font-hacker z-10">
+      <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-yellow-400 via-blue-500 to-yellow-400 animate-pulse"></div>
+      
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 animate-bounce relative flex items-center justify-center filter drop-shadow-[0_0_10px_#00ff41]">
+            <svg viewBox="0 0 100 100" class="w-full h-full overflow-visible">
+              <defs>
+                <radialGradient id="hackerGrad" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#00ff66" />
+                  <stop offset="60%" stop-color="#00cc33" />
+                  <stop offset="100%" stop-color="#005511" />
+                </radialGradient>
+                <linearGradient id="visorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00ffff" />
+                  <stop offset="100%" stop-color="#0088ff" />
+                </linearGradient>
+              </defs>
+              <path d="M 50 50 L 88.97 27.5 A 45 45 0 1 0 88.97 72.5 Z" fill="url(#hackerGrad)" stroke="#00ff41" stroke-width="2.5" />
+              <path d="M 12 42 C 16 12 78 12 84 38 C 72 22 28 22 12 42 Z" fill="#050d0a" opacity="0.9" />
+              <polygon points="26,25 66,25 58,43 30,43" fill="#090d16" stroke="url(#visorGrad)" stroke-width="2.5" />
+              <line x1="30" y1="31" x2="56" y2="31" stroke="#00ffff" stroke-width="2" stroke-dasharray="3 1.5" />
+              <line x1="32" y1="37" x2="50" y2="37" stroke="#00ff41" stroke-width="1.5" />
+              <text x="24" y="65" fill="#003311" font-size="10" font-family="monospace" font-weight="bold">0101</text>
+              <text x="20" y="78" fill="#00ff41" font-size="11" font-family="monospace" font-weight="bold">&gt;_</text>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="bg-yellow-400 text-black text-[10px] font-bold px-1.5 py-0.5 rounded font-pixel">1P</span>
+              <h1 class="font-pixel text-yellow-400 text-xs sm:text-sm md:text-base tracking-wider drop-shadow-[0_0_10px_#ffe600]">
+                PAC-MAN // ISMS_SECURITY_ASSESSMENT
+              </h1>
+            </div>
+            <div class="text-[11px] text-blue-300 tracking-widest mt-0.5 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-yellow-400 animate-ping"></span>
+              <span>STATUS: READY_TO_PLAY</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-6 font-pixel text-xs">
+          <div class="text-center">
+            <div class="text-red-500 animate-blink">1P_SCORE</div>
+            <div id="scoreDisplay" class="text-yellow-300 text-sm md:text-base mt-1 drop-shadow-[0_0_8px_#ffe600]">000000</div>
+          </div>
+          <div class="text-center hidden sm:block">
+            <div class="text-cyan-400">HIGH_SCORE</div>
+            <div id="highScoreDisplay" class="text-cyan-200 text-sm md:text-base mt-1 drop-shadow-[0_0_8px_#00ffff]">025000</div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2 font-pixel text-[11px]">
+          <button id="audioBtn" type="button" class="px-3 py-2 rounded border transition cursor-pointer relative z-10 active:scale-95 border-yellow-400 bg-yellow-950/80 text-yellow-300 shadow-[0_0_10px_#ffe600]">
+            🔊 AUDIO: ON
+          </button>
+          <button id="crtBtn" type="button" class="px-3 py-2 rounded border transition hidden md:inline-block cursor-pointer relative z-10 active:scale-95 border-gray-700 bg-black text-gray-500">
+            📺 CRT: OFF
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="maze-border bg-black/90 p-4 mb-8 font-hacker relative z-10">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-pixel text-xs text-yellow-400 flex items-center gap-2">
+          <span>PROGRESS:</span>
+          <span id="progressText" class="text-cyan-300">0%</span>
+        </span>
+        <span id="progressHint" class="font-pixel text-xs text-yellow-300 animate-pulse">
+          EAT ALL PELLETS TO COMPLETE!
+        </span>
+      </div>
+
+      <div class="relative w-full h-9 bg-black rounded border-2 border-blue-600 flex items-center px-4 overflow-hidden">
+        <div class="absolute inset-x-0 top-1 h-[2px] bg-blue-500/40"></div>
+        <div class="absolute inset-x-0 bottom-1 h-[2px] bg-blue-500/40"></div>
+
+        <!-- Dynamic Pellet Track Container -->
+        <div id="pelletTrack" class="w-full flex justify-between items-center z-0 font-pixel text-xs px-1"></div>
+
+        <div id="pacmanAvatar" class="absolute z-10 transition-all duration-500 ease-out top-1/2 -translate-y-1/2" style="left: calc(0% - 14px);">
+          <div class="w-8 h-8 relative flex items-center justify-center filter drop-shadow-[0_0_10px_#00ff41]">
+            <svg viewBox="0 0 100 100" class="w-full h-full overflow-visible">
+              <path d="M 50 50 L 88.97 27.5 A 45 45 0 1 0 88.97 72.5 Z" fill="#ffe600" stroke="#00ff41" stroke-width="2.5" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form id="assessmentForm" class="space-y-8 font-hacker relative z-10">
+      
+      <!-- Course Title Banner -->
+      <div class="arcade-box p-6 pt-9 sm:pt-7 rounded-lg border-2 border-blue-500 bg-black/90 shadow-[0_0_20px_rgba(33,33,255,0.3)] relative">
+        <div class="absolute top-2 right-3 font-pixel text-[9px] sm:text-[10px] text-yellow-400 bg-blue-950/80 px-2 py-0.5 rounded border border-blue-600/80 z-10 shadow">
+          ISMS 2026
+        </div>
+
+        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-yellow-400 mb-4 border-b border-blue-500/50 pb-3 flex items-center gap-3 sm:gap-4 pr-16 sm:pr-20">
+          <div class="relative shrink-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center">
+            <svg class="w-full h-full overflow-visible inline-block align-middle" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="pacGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffe600" stop-opacity="0.9" />
+                  <stop offset="50%" stop-color="#ffe600" stop-opacity="0.4" />
+                  <stop offset="100%" stop-color="#ffe600" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <circle cx="50" cy="50" r="48" fill="url(#pacGlow)" class="animate-pulse" />
+              <path d="M 50 50 L 86 26 A 40 40 0 1 0 86 74 Z" fill="#ffe600" stroke="#ccb800" stroke-width="2" />
+              <circle cx="52" cy="24" r="4.5" fill="#000000" />
+            </svg>
+          </div>
+          <span class="tracking-tight sm:tracking-normal drop-shadow-[0_0_15px_rgba(255,230,0,0.6)] leading-snug">資安 ( ISMS )全中心教育訓練視訊課程學習評量表</span>
+        </h2>
+        
+        <div class="space-y-2.5 text-base md:text-lg text-blue-200">
+          <div class="flex flex-wrap sm:flex-nowrap items-baseline gap-1.5">
+            <span class="text-yellow-400 font-bold shrink-0">📅 課程日期：</span>
+            <span>115/09/16(三) 09:30 AM-12:30 PM</span>
+          </div>
+          <div class="flex flex-wrap sm:flex-nowrap items-baseline gap-1.5">
+            <span class="text-yellow-400 font-bold shrink-0">👨‍🏫 講師：</span>
+            <span>鍾沛原 教育機構資安驗證中心稽核員</span>
+          </div>
+          <div class="flex flex-wrap sm:flex-nowrap items-baseline gap-1.5">
+            <span class="text-yellow-400 font-bold shrink-0">📚 課程名稱：</span>
+            <span>115年資通安全通識教育訓練</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Player Info Section -->
+      <div class="arcade-box p-6 rounded-lg relative space-y-6">
+        <div class="absolute -top-3 left-4 bg-yellow-400 text-black font-pixel px-3.5 py-1 text-sm font-extrabold rounded shadow-[0_0_10px_#ffe600]">
+          PLAYER_INFO // 填寫者基本資料
+        </div>
+
+        <div class="pt-2 space-y-5">
+          <div>
+            <label class="block text-base md:text-lg font-pixel text-yellow-400 mb-2">
+              姓名 / Name <span class="text-red-500 font-sans">*</span>
+            </label>
+            <input
+              id="inputName"
+              type="text"
+              required
+              placeholder="請輸入您的姓名..."
+              class="w-full bg-black border-2 border-blue-600 focus:border-yellow-400 text-yellow-200 text-lg md:text-xl px-4 py-3 rounded outline-none transition shadow-inner font-hacker"
+            />
+          </div>
+
+          <!-- Email Input Section -->
+          <div>
+            <label class="block text-base md:text-lg font-pixel text-yellow-400 mb-2">
+              電子郵件 / Email <span class="text-red-500 font-sans">*</span>
+            </label>
+            <input
+              id="inputEmail"
+              type="email"
+              required
+              placeholder="例如：帳號@rcpet.edu.tw"
+              class="w-full bg-black border-2 border-blue-600 focus:border-yellow-400 text-yellow-200 text-lg md:text-xl px-4 py-3 rounded outline-none transition shadow-inner font-hacker mb-2"
+            />
+            <div id="emailError" class="hidden text-red-400 bg-red-950/80 border border-red-500 p-2.5 rounded text-sm font-sans mb-2 flex items-center gap-2 animate-pulse">
+              <span class="text-lg">⚠️</span>
+              <span>帳號格式不符合要求！請務必輸入以 <b>@rcpet.edu.tw</b> 結尾的 Rcpet-Gmail 帳號。</span>
+            </div>
+            <p class="text-sm text-gray-300 font-sans leading-relaxed bg-blue-950/40 p-3 rounded border border-blue-800/60">
+              💡 請輸入您的國立臺灣師範大學 Rcpet-Gmail 帳號（例如：帳號@rcpet.edu.tw），作為學習評量表之回應與身分核對紀錄。
+            </p>
+          </div>
+        </div>
+
+        <!-- Project Categories -->
+        <div class="border-t border-blue-900/80 pt-5">
+          <label class="block text-base md:text-lg font-pixel text-cyan-400 mb-2">
+            計畫類別 <span class="text-red-500 font-sans">*</span> <span class="text-gray-300 font-sans text-base md:text-lg">(可複選)</span>
+          </label>
+          <div id="projectOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3"></div>
+        </div>
+
+        <!-- Title / Role -->
+        <div class="border-t border-blue-900/80 pt-5">
+          <label class="block text-base md:text-lg font-pixel text-cyan-400 mb-2">
+            職稱 <span class="text-red-500 font-sans">*</span>
+          </label>
+          <div id="titleRoleContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3"></div>
+        </div>
+
+        <!-- Test Type -->
+        <div class="border-t border-blue-900/80 pt-5">
+          <label class="block text-base md:text-lg font-pixel text-cyan-400 mb-2">
+            評量測驗類別 <span class="text-red-500 font-sans">*</span>
+          </label>
+          <div id="testTypeContainer" class="flex flex-wrap gap-4"></div>
+        </div>
+
+      </div>
+
+      <div class="space-y-6">
+        <div class="flex items-center justify-between border-b-2 border-blue-500 pb-2">
+          <h2 class="font-pixel text-yellow-400 text-xs sm:text-sm flex items-center gap-2">
+            <span>🛡️</span> ISMS QUIZ // 10 題資安測驗
+          </h2>
+          <span class="font-arcade text-xs text-cyan-300">QUESTIONS: 10</span>
+        </div>
+
+        <div id="questionsContainer" class="space-y-6"></div>
+      </div>
+
+      <!-- Feedback Section -->
+      <div class="arcade-box p-6 rounded-lg relative">
+        <div class="absolute -top-3 left-4 bg-cyan-400 text-black font-pixel px-3 py-1 text-xs font-bold rounded shadow-[0_0_10px_#00ffff]">
+          FEEDBACK // 課程心得與資安建議
+        </div>
+
+        <div class="mt-2">
+          <label class="block text-sm md:text-base font-pixel text-yellow-300 mb-2">
+            寫下您對本次 ISMS 視訊課程的建議或學習心得 <span class="text-gray-400 font-sans text-sm">(非必填)</span>：
+          </label>
+          <textarea
+            id="inputFeedback"
+            rows="3"
+            placeholder="請輸入您的寶貴意見..."
+            class="w-full bg-black border-2 border-blue-600 focus:border-yellow-400 text-yellow-200 text-base p-3 rounded outline-none transition font-sans"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center pt-6 pb-4">
+        <button
+          id="btnSubmit"
+          type="submit"
+          class="w-full sm:w-auto px-6 py-3.5 font-pixel text-base sm:text-xl md:text-2xl rounded-xl border-4 transition-all transform active:scale-95 cursor-pointer leading-relaxed bg-yellow-400 border-yellow-100 text-black font-extrabold hover:bg-yellow-300 hover:shadow-[0_0_40px_#ffe600] animate-pulse"
+        >
+          🟡 送出學習評量表 (SUBMIT FORM)
+        </button>
+      </div>
+
+    </form>
+
+    <!-- Footer -->
+    <footer class="mt-12 text-center text-xs text-gray-300 font-hacker space-y-2 py-4 border-t border-blue-900/60 relative z-10">
+      <p>👾 ISMS SECURITY ASSESSMENT SYSTEM // PAC-MAN ARCADE EDITION</p>
+      <p class="text-gray-300 font-sans">
+        版權所有 © 國立臺灣師範大學 心理與教育測驗研究發展中心
+      </p>
+    </footer>
+  </div>
+
+  <!-- System Alert Modal -->
+  <div id="arcadeAlertModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 font-hacker">
+    <div class="arcade-box w-full max-w-md p-6 rounded-lg border-4 border-red-500 shadow-[0_0_30px_#ff0000] text-center space-y-4">
+      <div class="text-red-400 font-pixel text-sm animate-pulse flex items-center justify-center gap-2">
+        <span>⚠️</span> <span id="arcadeAlertTitle">SYSTEM NOTICE // 系統提示</span>
+      </div>
+      <p id="arcadeAlertMessage" class="text-white text-base font-sans leading-relaxed">
+        提示內容
+      </p>
+      <button id="arcadeAlertBtn" type="button" class="px-6 py-2.5 bg-red-600 text-white font-pixel text-xs font-bold rounded shadow-[0_0_15px_#ff0000] hover:bg-red-500 cursor-pointer active:scale-95 transition">
+        確定 (OK)
+      </button>
+    </div>
+  </div>
+
+  <!-- Config Settings Modal -->
+  <div id="settingsModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 font-hacker">
+    <div class="arcade-box w-full max-w-2xl p-6 rounded-lg border-4 border-blue-500 shadow-[0_0_30px_#2121ff] max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-blue-500 pb-3 mb-4">
+        <h3 class="font-pixel text-yellow-400 text-xs sm:text-sm">
+          ⚙️ GOOGLE FORM ENTRY CONFIGURATOR
+        </h3>
+        <button id="closeModalBtn" type="button" class="text-gray-400 hover:text-white font-pixel text-xs cursor-pointer">
+          ✖ CLOSE
+        </button>
+      </div>
+
+      <div class="p-3 bg-blue-950/80 border border-yellow-400/80 rounded mb-4 text-xs text-blue-200 leading-relaxed font-sans space-y-2">
+        <p class="font-bold text-yellow-300 flex items-center gap-1 font-pixel text-[11px]">
+          ⚡ 智慧自動帶入 entry 代碼 (已完成自動對應)：
+        </p>
+        <p class="text-gray-200 text-xs">
+          目前此系統已精準對應您指定的 Google 表單全部 15 項 entry 代碼，玩家填寫後將直接自動同步至表單 Sheet 試算表。
+        </p>
+      </div>
+
+      <form id="configForm" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-pixel text-cyan-400 mb-1">Google Form Action URL:</label>
+          <input id="cfgActionUrl" type="text" class="w-full bg-black border border-blue-600 text-yellow-300 p-2 rounded text-xs" />
+        </div>
+
+        <div>
+          <label class="block font-pixel text-cyan-400 mb-1">Google Apps Script 自動寄信網址 (選填 / Web App Endpoint):</label>
+          <input id="cfgGasUrl" type="text" value="https://script.google.com/macros/s/AKfycbyrjTjDbVtmJkczC5Tia3bU-Uuw8tLDaSRMfGmbD0N0YU7siEOuTmDAPfJk13mpWUcoCg/exec" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-black border border-blue-600 text-yellow-300 p-2 rounded text-xs" />
+          <p class="text-[10px] text-gray-400 mt-1">若填寫 GAS 網址，系統將透過背景 API 直接發送 HTML 成績單至填寫者信箱。</p>
+        </div>
+
+        <div id="configFieldsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2"></div>
+
+        <div class="pt-4 flex justify-end gap-2">
+          <button id="cancelModalBtn" type="button" class="px-4 py-2 border border-gray-700 rounded text-gray-300 font-pixel text-xs cursor-pointer">
+            CANCEL
+          </button>
+          <button type="submit" class="px-6 py-2 bg-yellow-400 text-black font-pixel text-xs font-bold rounded shadow-[0_0_10px_#ffe600] cursor-pointer">
+            💾 儲存設定 (SAVE)
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Stage Clear Modal -->
+  <div id="stageClearModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 font-hacker animate-fade-in">
+    <div class="arcade-box w-full max-w-lg p-6 rounded-lg border-4 border-yellow-400 shadow-[0_0_50px_#ffe600] text-center space-y-6">
+      
+      <div id="stageClearBadge" class="inline-block bg-yellow-400 text-black px-4 py-1 font-pixel text-sm md:text-base font-extrabold rounded shadow-[0_0_15px_#ffe600] animate-bounce">
+        🎉 STAGE CLEAR // 提交成功！
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-xl md:text-2xl font-bold text-cyan-300 font-sans">
+          感謝您完成 ISMS 資安教育訓練評量！
+        </h3>
+      </div>
+
+      <div class="p-4 bg-blue-950/60 border-2 border-blue-500 rounded-lg space-y-3">
+        <div class="text-xs font-pixel text-yellow-400">TEST_RESULT // 測驗得分估算</div>
+        <div id="scoreResultValue" class="text-4xl font-pixel text-yellow-300 drop-shadow-[0_0_12px_#ffe600]">
+          100 <span class="text-lg">分</span>
+        </div>
+        <p id="correctCountText" class="text-xs text-gray-300 font-sans">
+          答對題數：10 / 10 題
+        </p>
+
+        <!-- Wrong Questions Warning Notification Box -->
+        <div id="wrongQuestionsBox" class="hidden text-xs text-red-300 bg-red-950/80 border border-red-500/80 p-3 rounded-lg text-left font-sans space-y-1 mt-2">
+          <div class="font-bold text-red-400 flex items-center gap-1.5 text-sm">
+            <span>⚠️</span> <span>測驗複測提醒：</span>
+          </div>
+          <p id="wrongQuestionsList" class="leading-relaxed"></p>
+        </div>
+      </div>
+
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button id="btnSendEmail" type="button" class="w-full sm:w-auto px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-pixel text-xs rounded border border-blue-400 shadow-[0_0_10px_#2121ff] cursor-pointer active:scale-95 transition">
+          📧 傳送成績至信箱 (SEND EMAIL)
+        </button>
+        <button id="btnRetest" type="button" class="w-full sm:w-auto px-5 py-2.5 bg-yellow-400 hover:bg-yellow-300 text-black font-pixel text-xs font-bold rounded border border-yellow-200 shadow-[0_0_10px_#ffe600] cursor-pointer active:scale-95 transition">
+          🔄 進入複測評量 (RETEST NOW)
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const createSoundFx = () => {
+      let audioCtx = null;
+      const getAudioContext = () => {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      };
+
+      return {
+        playWaka: () => {
+          try {
+            const ctx = getAudioContext(); if (!ctx) return;
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(300, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.06);
+            gain.gain.setValueAtTime(0.12, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.06);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(); osc.stop(ctx.currentTime + 0.06);
+          } catch(e) {}
+        },
+        playSelect: () => {
+          try {
+            const ctx = getAudioContext(); if (!ctx) return;
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            osc.frequency.setValueAtTime(1400, ctx.currentTime + 0.04);
+            gain.gain.setValueAtTime(0.15, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(); osc.stop(ctx.currentTime + 0.11);
+          } catch(e) {}
+        },
+        playPowerPellet: () => {
+          try {
+            const ctx = getAudioContext(); if (!ctx) return;
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(150, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(2400, ctx.currentTime + 0.3);
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(); osc.stop(ctx.currentTime + 0.31);
+          } catch(e) {}
+        },
+        playWinFanfare: () => {
+          try {
+            const ctx = getAudioContext(); if (!ctx) return;
+            const notes = [300, 450, 600, 900, 1200, 1600];
+            notes.forEach((freq, idx) => {
+              const osc = ctx.createOscillator(); const gain = ctx.createGain();
+              osc.type = 'square'; osc.frequency.value = freq;
+              const startTime = ctx.currentTime + (idx * 0.09);
+              gain.gain.setValueAtTime(0.12, startTime);
+              gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.2);
+              osc.connect(gain); gain.connect(ctx.destination);
+              osc.start(startTime); osc.stop(startTime + 0.21);
+            });
+          } catch(e) {}
+        }
+      };
+    };
+
+    const sfx = createSoundFx();
+
+    const PROJECT_OPTIONS = [
+      '國中教育會考計畫',
+      '國中教育會考計畫 - 行政組',
+      '國中教育會考計畫 - 試題組',
+      '國中教育會考計畫 - 測評組',
+      '國中教育會考計畫 - 資訊組',
+      '國中教育會考計畫 - 試務組',
+      '十二年國民基本教育學生適性入場資料管理平臺',
+      '素養導向課室評量計畫',
+      '教師資格考試計畫',
+      '中學生網站',
+      '師資生潛能測驗組合應用計畫'
+    ];
+
+    const TITLE_OPTIONS = [
+      '主管 (主任、副主任、組長、副組長)',
+      '研究人員',
+      '技術人員',
+      '組員',
+      '專任助理/助理',
+      '工讀生',
+      '臨時人員'
+    ];
+
+    const TEST_TYPE_OPTIONS = ['首次評量', '複測評量'];
+
+    const DEFAULT_QUESTIONS = [
+      { id: 'q1', title: '1. 公務機關辦理資通系統委外時，若委託案件金額低於15萬元以下，因案件金額較低，依法可以免簽定書面契約。', options: ['是', '否'], correctIndex: 1, ghostColor: '#ff0000' },
+      { id: 'q2', title: '2. 根據修正後的資通安全事件通報應變及演練辦法規定，電子類個人資料遭竄改、洩漏或誤揭露，不再絕對屬於重大資安事件。', options: ['是', '否'], correctIndex: 0, ghostColor: '#ffb8ff' },
+      { id: 'q3', title: '3. 依修正後的資通安全責任等級分級辦法應辦事項規定，A~C級機關資通安全健診執行項目，需新增核心資通系統資料庫安全檢視作業。', options: ['是', '否'], correctIndex: 1, ghostColor: '#00ffff' },
+      { id: 'q4', title: '4. 修正後的防護基準(附表十)，針對高防護需求等級之資通系統，新增需配置異地備援機制之要求。', options: ['是', '否'], correctIndex: 1, ghostColor: '#ffb852' },
+      { id: 'q5', title: '5. 根據資通安全管理法及其子法的規定，套裝軟體無須檢附使用之第三方軟體、服務、函式庫或其他元件。', options: ['是', '否'], correctIndex: 0, ghostColor: '#ff0000' },
+      { id: 'q6', title: '6. 依規定公務機關不得採購及使用危害國家資通安全產品，但因業務需求且無其他替代方案者，經機關資通安全長核可，並函報主管機關核定後，可列冊管理並以專案方式使用。', options: ['是', '否'], correctIndex: 0, ghostColor: '#ffb8ff' },
+      { id: 'q7', title: '7. 近期偵測到的社交工程信件中，部分被發現其中含有以圖片形式呈現通行碼的內容，攻擊者主要目的在於透過精美的圖片設計，吸引受害者上當，達到開啟附件壓縮檔，並成功在受害者電腦植入惡意程式。', options: ['是', '否'], correctIndex: 1, ghostColor: '#00ffff' },
+      { id: 'q8', title: '8. 根據修正後的防護基準(附表十)規定，無論屬於何種防護需求等級之資通系統，皆須訂定從中斷後重新恢復之「可容忍中斷時間要求」。', options: ['是', '否'], correctIndex: 1, ghostColor: '#ffb852' },
+      { id: 'q9', title: '9. 根據2026 iThome CIO & CISO的調查，社交工程依舊是人員管理上最大的資安危害因子。', options: ['是', '否'], correctIndex: 0, ghostColor: '#ff0000' },
+      { id: 'q10', title: '10. 按照資通安全事件通報應變及演練辦法的規定。發生影響資通系統中斷的資通安全事件，事件等級主要以是否超過「最大可容忍中斷時間」作為衡量基準。', options: ['是', '否'], correctIndex: 1, ghostColor: '#ffb8ff' }
+    ];
+
+    let state = {
+      soundOn: true,
+      crtOn: false,
+      name: '',
+      email: '',
+      projects: [],
+      titleRole: '',
+      testType: '',
+      answers: {},
+      feedback: '',
+      isRetestLocked: false
+    };
+
+    let prevEatenCount = 0;
+
+    // Google Form 15 項核心評量欄位 + 心得建議對應表
+    let formMapping = {
+      actionUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdGJJ82vyEhGq76HTgI7GrOa-C3tw_sVsUSBdQsER5lSX2Tvw/formResponse',
+      gasWebhookUrl: 'https://script.google.com/macros/s/AKfycbyrjTjDbVtmJkczC5Tia3bU-Uuw8tLDaSRMfGmbD0N0YU7siEOuTmDAPfJk13mpWUcoCg/exec',
+      name: 'entry.1790738672',        // 1. 姓名
+      email: 'entry.31047504',         // 2. 電子郵件 (另外同步帶入 emailAddress)
+      projects: 'entry.1581519088',    // 3. 計畫類別
+      titleRole: 'entry.998360112',    // 4. 職稱
+      testType: 'entry.617173465',     // 5. 評量測驗類別
+      q1: 'entry.518713958',          // 6. 測驗第 1 題
+      q2: 'entry.1946505767',         // 7. 測驗第 2 題
+      q3: 'entry.1787966763',         // 8. 測驗第 3 題
+      q4: 'entry.27702213',           // 9. 測驗第 4 題
+      q5: 'entry.43731527',           // 10. 測驗第 5 題
+      q6: 'entry.1557204891',         // 11. 測驗第 6 題
+      q7: 'entry.1531609753',         // 12. 測驗第 7 題
+      q8: 'entry.1538607686',         // 13. 測驗第 8 題
+      q9: 'entry.72957944',           // 14. 測驗第 9 題
+      q10: 'entry.1891425171',        // 15. 測驗第 10 題
+      feedback: 'entry.731271585'     // 16. 心得建議 (選填)
+    };
+
+    function showArcadeAlert(msg, title = 'WARNING // 填寫提醒') {
+      const modal = document.getElementById('arcadeAlertModal');
+      const msgEl = document.getElementById('arcadeAlertMessage');
+      const titleEl = document.getElementById('arcadeAlertTitle');
+      const btn = document.getElementById('arcadeAlertBtn');
+
+      if (modal && msgEl) {
+        msgEl.innerText = msg;
+        if (titleEl) titleEl.innerText = title;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        
+        btn.onclick = () => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        };
+      }
+    }
+
+    function isRcpetEmail(email) {
+      if (!email) return false;
+      return email.trim().toLowerCase().endsWith('@rcpet.edu.tw');
+    }
+
+    function getGhostSvg(color) {
+      return `
+        <svg class="w-7 h-7 flex-shrink-0 mt-0.5 animate-ghost filter drop-shadow-[0_0_8px_${color}]" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 1H12V3H14V6H15V15H13V13H11V15H9V13H7V15H5V13H3V15H1V6H2V3H4V1Z" fill="${color}"/>
+          <circle cx="5" cy="6" r="1.5" fill="#ffffff" />
+          <circle cx="11" cy="6" r="1.5" fill="#ffffff" />
+          <circle cx="4" cy="6" r="0.8" fill="#0000ff" />
+          <circle cx="10" cy="6" r="0.8" fill="#0000ff" />
+        </svg>
+      `;
+    }
+
+    function renderProjectOptions() {
+      const container = document.getElementById('projectOptionsContainer');
+      container.innerHTML = PROJECT_OPTIONS.map((proj) => {
+        const checked = state.projects.includes(proj);
+        return `
+          <div data-proj="${proj}" class="project-item flex items-center gap-3 p-3 rounded border transition cursor-pointer select-none ${
+            checked 
+              ? 'border-yellow-400 bg-yellow-950/60 text-yellow-200 shadow-[0_0_8px_rgba(255,230,0,0.4)]' 
+              : 'border-blue-900/80 bg-black/80 text-gray-200 hover:border-yellow-500'
+          }">
+            <input type="checkbox" ${checked ? 'checked' : ''} class="accent-yellow-400 w-5 h-5 rounded pointer-events-none shrink-0" readOnly />
+            <span class="leading-snug font-sans text-base md:text-lg">${proj}</span>
+          </div>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.project-item').forEach(el => {
+        el.onclick = () => {
+          const proj = el.getAttribute('data-proj');
+          const idx = state.projects.indexOf(proj);
+          if (idx > -1) state.projects.splice(idx, 1);
+          else state.projects.push(proj);
+          if (state.soundOn) sfx.playSelect();
+          renderProjectOptions();
+          updateProgress();
+        };
+      });
+    }
+
+    function renderTitleRoles() {
+      const container = document.getElementById('titleRoleContainer');
+      container.innerHTML = TITLE_OPTIONS.map((titleOpt) => {
+        const selected = state.titleRole === titleOpt;
+        return `
+          <div data-title="${titleOpt}" class="title-item flex items-center gap-3 p-3 rounded border transition cursor-pointer select-none ${
+            selected 
+              ? 'border-cyan-400 bg-cyan-950/60 text-cyan-200 shadow-[0_0_10px_rgba(0,255,255,0.4)]' 
+              : 'border-blue-900/80 bg-black/80 text-gray-200 hover:border-cyan-500'
+          }">
+            <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+              selected ? 'border-cyan-400 bg-cyan-400' : 'border-blue-600'
+            }">
+              ${selected ? '<div class="w-2 h-2 rounded-full bg-black"></div>' : ''}
+            </div>
+            <span class="font-sans text-base md:text-lg">${titleOpt}</span>
+          </div>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.title-item').forEach(el => {
+        el.onclick = () => {
+          state.titleRole = el.getAttribute('data-title');
+          if (state.soundOn) sfx.playSelect();
+          renderTitleRoles();
+          updateProgress();
+        };
+      });
+    }
+
+    function renderTestTypes() {
+      const container = document.getElementById('testTypeContainer');
+      container.innerHTML = TEST_TYPE_OPTIONS.map((typeOpt) => {
+        const selected = state.testType === typeOpt;
+        const isDisabled = state.isRetestLocked && typeOpt === '首次評量';
+
+        return `
+          <div data-type="${typeOpt}" class="testtype-item flex items-center gap-3 px-5 py-3 rounded border transition select-none ${
+            isDisabled 
+              ? 'opacity-40 cursor-not-allowed border-gray-800 bg-black/40 text-gray-500'
+              : selected 
+                ? 'border-yellow-400 bg-yellow-950/60 text-yellow-200 shadow-[0_0_10px_rgba(255,230,0,0.4)] cursor-pointer' 
+                : 'border-blue-900/80 bg-black/80 text-gray-200 hover:border-yellow-500 cursor-pointer'
+          }">
+            <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+              isDisabled ? 'border-gray-700 bg-gray-900' : selected ? 'border-yellow-400 bg-yellow-400' : 'border-blue-600'
+            }">
+              ${selected ? `<div class="w-2 h-2 rounded-full ${isDisabled ? 'bg-gray-500' : 'bg-black'}"></div>` : ''}
+            </div>
+            <span class="font-sans font-bold text-base md:text-lg">${typeOpt}${isDisabled ? ' (鎖定)' : ''}</span>
+          </div>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.testtype-item').forEach(el => {
+        el.onclick = () => {
+          const typeOpt = el.getAttribute('data-type');
+          if (state.isRetestLocked && typeOpt === '首次評量') {
+            showArcadeAlert('目前正進行複測評量，無法切換回首次評量。', 'NOTICE // 評量類別鎖定');
+            return;
+          }
+          state.testType = typeOpt;
+          if (state.soundOn) sfx.playSelect();
+          renderTestTypes();
+          updateProgress();
+        };
+      });
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = DEFAULT_QUESTIONS.map((q) => {
+        const selectedOpt = state.answers[q.id];
+        const isAnswered = selectedOpt !== undefined;
+
+        return `
+          <div class="arcade-box p-5 rounded-lg transition-all duration-300 relative ${
+            isAnswered ? 'border-yellow-400 shadow-[0_0_15px_rgba(255,230,0,0.35)]' : ''
+          }">
+            <div class="flex items-start gap-3 mb-4">
+              ${getGhostSvg(q.ghostColor)}
+              <div class="flex-1">
+                <h3 class="text-base md:text-lg font-bold text-white leading-relaxed font-sans">
+                  ${q.title} <span class="text-red-500 font-sans">*</span>
+                </h3>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-0 md:pl-10">
+              ${q.options.map((opt, optIdx) => {
+                const isSelected = selectedOpt === optIdx;
+                return `
+                  <div data-qid="${q.id}" data-optidx="${optIdx}" class="quiz-opt-item flex items-center gap-3 p-3 rounded-md border-2 cursor-pointer transition select-none ${
+                    isSelected
+                      ? 'border-yellow-400 bg-yellow-950/60 text-yellow-300 shadow-[0_0_12px_rgba(255,230,0,0.4)]'
+                      : 'border-blue-900/80 bg-black/80 text-gray-200 hover:border-cyan-400 hover:bg-blue-950/40'
+                  }">
+                    <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                      isSelected ? 'border-yellow-400 bg-yellow-400' : 'border-blue-600 bg-transparent'
+                    }">
+                      ${isSelected ? '<div class="w-1.5 h-1.5 rounded-full bg-black"></div>' : ''}
+                    </div>
+                    <span class="text-sm md:text-base font-medium font-sans">${opt}</span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.quiz-opt-item').forEach(el => {
+        el.onclick = () => {
+          const qid = el.getAttribute('data-qid');
+          const optIdx = parseInt(el.getAttribute('data-optidx'), 10);
+          state.answers[qid] = optIdx;
+          if (state.soundOn) sfx.playSelect();
+          renderQuestions();
+          updateProgress();
+          updateScoreDisplay();
+        };
+      });
+    }
+
+    function renderPelletTrack(eatenCount, totalSteps) {
+      const track = document.getElementById('pelletTrack');
+      if (!track) return;
+      let html = '';
+      for (let i = 1; i <= totalSteps; i++) {
+        const isEaten = i <= eatenCount;
+        if (i === totalSteps) {
+          html += `
+            <div class="transition-all duration-300 transform ${
+              isEaten ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'
+            } text-yellow-300 drop-shadow-[0_0_12px_#ffe600] animate-pulse font-bold select-none">
+              ⚽[PWR]
+            </div>`;
+        } else {
+          html += `
+            <div class="w-2.5 h-2.5 rounded-full bg-pink-200 shadow-[0_0_6px_#ffb8ff] transition-all duration-300 transform ${
+              isEaten ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
+            }"></div>`;
+        }
+      }
+      track.innerHTML = html;
+    }
+
+    function updateProgress() {
+      let count = 0;
+      if (state.name.trim()) count++;
+      if (isRcpetEmail(state.email)) count++;
+      if (state.projects.length > 0) count++;
+      if (state.titleRole) count++;
+      if (state.testType) count++;
+      
+      const answeredCount = Object.keys(state.answers).length;
+      count += answeredCount;
+
+      const totalRequiredSteps = 5 + DEFAULT_QUESTIONS.length;
+      const percent = Math.min(100, Math.round((count / totalRequiredSteps) * 100));
+
+      if (count > prevEatenCount) {
+        if (state.soundOn) sfx.playWaka();
+      }
+      prevEatenCount = count;
+
+      renderPelletTrack(count, totalRequiredSteps);
+
+      document.getElementById('progressText').innerText = `${percent}%`;
+      document.getElementById('progressHint').innerText = 
+        percent === 100 ? 'STAGE CLEAR // READY TO SUBMIT!' : 'EAT ALL PELLETS TO COMPLETE!';
+
+      const avatar = document.getElementById('pacmanAvatar');
+      const clampLeft = Math.max(0, Math.min(95, percent));
+      avatar.style.left = `calc(${clampLeft}% - 14px)`;
+    }
+
+    function updateScoreDisplay() {
+      const scoreEl = document.getElementById('scoreDisplay');
+      if (!scoreEl) return;
+      
+      let currentScore = 0;
+      DEFAULT_QUESTIONS.forEach(q => {
+        if (state.answers[q.id] === q.correctIndex) {
+          currentScore += 2500;
+        }
+      });
+      
+      scoreEl.innerText = String(currentScore).padStart(6, '0');
+    }
+
+    window.onload = function() {
+      const inputName = document.getElementById('inputName');
+      inputName.oninput = (e) => {
+        state.name = e.target.value;
+        if (state.soundOn) sfx.playWaka();
+        updateProgress();
+      };
+
+      const inputEmail = document.getElementById('inputEmail');
+      const emailError = document.getElementById('emailError');
+      
+      const checkEmailValidation = () => {
+        const val = inputEmail.value.trim();
+        state.email = val;
+        
+        if (val.length > 0 && !isRcpetEmail(val)) {
+          emailError.classList.remove('hidden');
+          inputEmail.classList.add('border-red-500', 'bg-red-950/20');
+          inputEmail.classList.remove('border-blue-600', 'focus:border-yellow-400');
+        } else {
+          emailError.classList.add('hidden');
+          inputEmail.classList.remove('border-red-500', 'bg-red-950/20');
+          inputEmail.classList.add('border-blue-600', 'focus:border-yellow-400');
+        }
+      };
+
+      inputEmail.oninput = (e) => {
+        checkEmailValidation();
+        if (state.soundOn) sfx.playWaka();
+        updateProgress();
+      };
+
+      inputEmail.onblur = () => {
+        checkEmailValidation();
+      };
+
+      const inputFeedback = document.getElementById('inputFeedback');
+      inputFeedback.oninput = (e) => {
+        state.feedback = e.target.value;
+      };
+
+      const audioBtn = document.getElementById('audioBtn');
+      if (audioBtn) {
+        audioBtn.onclick = () => {
+          state.soundOn = !state.soundOn;
+          audioBtn.innerText = state.soundOn ? '🔊 AUDIO: ON' : '🔇 AUDIO: OFF';
+          audioBtn.className = state.soundOn 
+            ? 'px-3 py-2 rounded border transition cursor-pointer relative z-10 active:scale-95 border-yellow-400 bg-yellow-950/80 text-yellow-300 shadow-[0_0_10px_#ffe600]'
+            : 'px-3 py-2 rounded border transition cursor-pointer relative z-10 active:scale-95 border-gray-700 bg-black text-gray-500';
+        };
+      }
+
+      const crtBtn = document.getElementById('crtBtn');
+      const crtOverlay = document.getElementById('crtOverlay');
+      if (crtBtn && crtOverlay) {
+        crtBtn.onclick = () => {
+          state.crtOn = !state.crtOn;
+          if (state.crtOn) {
+            crtOverlay.classList.remove('hidden');
+            crtBtn.innerText = '📺 CRT: ON';
+            crtBtn.className = 'px-3 py-2 rounded border transition hidden md:inline-block cursor-pointer relative z-10 active:scale-95 border-cyan-400 bg-cyan-950/80 text-cyan-300 shadow-[0_0_10px_#00ffff]';
+          } else {
+            crtOverlay.classList.add('hidden');
+            crtBtn.innerText = '📺 CRT: OFF';
+            crtBtn.className = 'px-3 py-2 rounded border transition hidden md:inline-block cursor-pointer relative z-10 active:scale-95 border-gray-700 bg-black text-gray-500';
+          }
+        };
+      }
+
+      // 表單提交處理（修復：採用單一靜默 iframe POST 提交，移除衝突的 fetch 與多餘欄位）
+      document.getElementById('assessmentForm').onsubmit = function(e) {
+        e.preventDefault();
+
+        // 1. 資料基本驗證
+        if (!state.name.trim()) {
+          showArcadeAlert('請輸入您的姓名！'); 
+          document.getElementById('inputName').focus();
+          return;
+        }
+
+        if (!state.email.trim()) {
+          showArcadeAlert('請輸入電子郵件帳號！'); 
+          document.getElementById('inputEmail').focus();
+          return;
+        }
+
+        if (!isRcpetEmail(state.email)) {
+          showArcadeAlert('電子郵件格式不正確！必須使用國立臺灣師範大學 @rcpet.edu.tw 結尾之帳號。'); 
+          document.getElementById('inputEmail').focus();
+          return;
+        }
+
+        if (state.projects.length === 0) {
+          showArcadeAlert('請至少勾選一個「計畫類別」！'); return;
+        }
+        if (!state.titleRole) {
+          showArcadeAlert('請選擇您的「職稱」！'); return;
+        }
+        if (!state.testType) {
+          showArcadeAlert('請選擇「評量測驗類別」！'); return;
+        }
+        if (Object.keys(state.answers).length < DEFAULT_QUESTIONS.length) {
+          showArcadeAlert(`請完成所有 ${DEFAULT_QUESTIONS.length} 題資安測驗！`); return;
+        }
+
+        // 2. 更新按鈕狀態
+        const btnSubmit = document.getElementById('btnSubmit');
+        btnSubmit.disabled = true;
+        btnSubmit.innerText = '🚀 SUBMITTING RESPONSES...';
+        btnSubmit.className = 'w-full sm:w-auto px-6 py-3.5 font-pixel text-base sm:text-xl md:text-2xl rounded-xl border-4 transition-all bg-gray-900 border-gray-700 text-gray-500 cursor-not-allowed';
+
+        if (state.soundOn) sfx.playPowerPellet();
+
+        try {
+          // 3. 建立單一靜默動態表單提交至隱藏 iframe
+          let iframe = document.getElementById('hidden_google_form_iframe');
+          if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.name = 'hidden_google_form_iframe';
+            iframe.id = 'hidden_google_form_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+          }
+
+          // 建立動態表單
+          const form = document.createElement('form');
+          form.method = 'POST';
+          // 加上 embedded=true 以防止被 iframe 跨網域阻擋
+          const baseUrl = formMapping.actionUrl.split('?')[0];
+          form.action = baseUrl + '?embedded=true';
+          form.target = 'hidden_google_form_iframe';
+          form.style.display = 'none';
+
+          const addField = (name, val) => {
+            if (!name) return;
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = val;
+            form.appendChild(input);
+          };
+
+          // 帶入個人資訊與選單項目 (僅帶入 entry.XXXXXX 代碼)
+          addField(formMapping.name, state.name.trim());
+          addField(formMapping.email, state.email.trim());
+          addField(formMapping.titleRole, state.titleRole);
+          addField(formMapping.testType, state.testType);
+          if (state.feedback && state.feedback.trim()) {
+            addField(formMapping.feedback, state.feedback.trim());
+          }
+
+          // 帶入複選計畫類別 (Google 表單複選題需重複 append 同一個 entry 代碼)
+          state.projects.forEach(proj => {
+            addField(formMapping.projects, proj);
+          });
+
+          // 帶入 10 題測驗答案 ("是" 或 "否")
+          DEFAULT_QUESTIONS.forEach((q, idx) => {
+            const answerIdx = state.answers[q.id];
+            const answerText = q.options[answerIdx] || '';
+            addField(formMapping[`q${idx+1}`], answerText);
+          });
+
+          // 【關鍵修正】先將 form 完整掛載至 document.body
+          document.body.appendChild(form);
+
+          // 使用 requestAnimationFrame 或 setTimeout 確保 DOM 渲染後再執行 submit
+          setTimeout(() => {
+            form.submit();
+            // 提交完成後延遲移除動態表單
+            setTimeout(() => {
+              if (document.body.contains(form)) {
+                document.body.removeChild(form);
+              }
+            }, 2000);
+          }, 100);
+
+        } catch (err) {
+          console.error("Submission error:", err);
+        }
+
+        // 4. 計算成績與顯示結果彈窗
+        setTimeout(() => {
+          btnSubmit.disabled = false;
+          btnSubmit.innerText = '🟡 送出學習評量表 (SUBMIT FORM)';
+          btnSubmit.className = 'w-full sm:w-auto px-6 py-3.5 font-pixel text-base sm:text-xl md:text-2xl rounded-xl border-4 transition-all transform active:scale-95 cursor-pointer leading-relaxed bg-yellow-400 border-yellow-100 text-black font-extrabold hover:bg-yellow-300 hover:shadow-[0_0_40px_#ffe600] animate-pulse';
+
+          let correctCount = 0;
+          let wrongQNums = [];
+          DEFAULT_QUESTIONS.forEach((q, idx) => {
+            if (state.answers[q.id] === q.correctIndex) {
+              correctCount++;
+            } else {
+              wrongQNums.push(idx + 1);
+            }
+          });
+          const scorePercent = Math.round((correctCount / DEFAULT_QUESTIONS.length) * 100);
+
+          document.getElementById('scoreResultValue').innerHTML = `${scorePercent} <span class="text-lg">分</span>`;
+          document.getElementById('correctCountText').innerText = `答對題數：${correctCount} / ${DEFAULT_QUESTIONS.length} 題`;
+
+          const wrongBox = document.getElementById('wrongQuestionsBox');
+          const wrongList = document.getElementById('wrongQuestionsList');
+          const badge = document.getElementById('stageClearBadge');
+          const btnRetest = document.getElementById('btnRetest');
+
+          if (scorePercent < 70) {
+            if (badge) {
+              badge.innerText = '⚠️ RETEST REQUIRED // 需進行複測';
+              badge.className = 'inline-block bg-red-600 text-white px-4 py-1 font-pixel text-sm md:text-base font-extrabold rounded shadow-[0_0_15px_#ff0000] animate-pulse';
+            }
+            if (wrongBox && wrongList) {
+              wrongList.innerText = `答錯題號：第 ${wrongQNums.join('、')} 題`;
+              wrongBox.classList.remove('hidden');
+            }
+            if (btnRetest) {
+              btnRetest.classList.remove('hidden');
+            }
+          } else {
+            if (badge) {
+              badge.innerText = '🎉 STAGE CLEAR // 評量合格！';
+              badge.className = 'inline-block bg-yellow-400 text-black px-4 py-1 font-pixel text-sm md:text-base font-extrabold rounded shadow-[0_0_15px_#ffe600] animate-bounce';
+            }
+            if (wrongBox && wrongList) {
+              if (wrongQNums.length > 0) {
+                wrongList.innerText = `答錯題號：第 ${wrongQNums.join('、')} 題（已達 70 分合格標準）`;
+                wrongBox.classList.remove('hidden');
+              } else {
+                wrongBox.classList.add('hidden');
+              }
+            }
+            if (btnRetest) {
+              btnRetest.classList.add('hidden');
+            }
+          }
+
+          const stageModal = document.getElementById('stageClearModal');
+          stageModal.classList.remove('hidden');
+          stageModal.classList.add('flex');
+
+          if (state.soundOn) sfx.playWinFanfare();
+        }, 1200);
+      };
+
+      // Modal reset & retest handlers
+      // 綁定「寄送結果至信箱」按鈕事件
+      document.getElementById('btnSendEmail')?.addEventListener('click', async function() {
+        // 取得 GAS 網址與填寫者資訊
+        const gasUrl = formMapping.gasWebhookUrl || document.getElementById('cfgGasUrl')?.value?.trim();
+        const email = document.getElementById('inputEmail').value.trim();
+        const name = document.getElementById('inputName').value.trim();
+
+        // 1. 檢查是否有設定 GAS 網址
+        if (!gasUrl) {
+          showArcadeAlert('尚未設定自動寄信服務網址！請先至設定選單（右上角或系統設定）填寫 Google Apps Script 網址。', '系統提示');
+          return;
+        }
+
+        // 2. 檢查 Email
+        if (!email || !isRcpetEmail(email)) {
+          showArcadeAlert('無法取得有效的 Email，請確認填寫的郵件地址是否正確！', '格式錯誤');
+          return;
+        }
+
+        // 3. 變更按鈕狀態為寄送中
+        const btn = this;
+        const originalText = btn.innerText;
+        btn.disabled = true;
+        btn.innerText = '⏳ 信件寄送中...';
+
+        try {
+          // 準備發送至 GAS 的資料包
+          const payload = {
+            name: name,
+            email: email,
+            score: document.getElementById('scoreResultValue').innerText,
+            correctCount: document.getElementById('correctCountText').innerText,
+            projects: state.projects.join(', '),
+            titleRole: state.titleRole,
+            testType: state.testType
+          };
+
+          // 發送 POST 請求給 GAS (使用 no-cors 避免跨網域安全性擋截)
+          await fetch(gasUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          showArcadeAlert(`成績評量結果已成功寄送至：\n${email}`, '📧 寄送成功');
+        } catch (err) {
+          console.error('Email send error:', err);
+          showArcadeAlert('寄送信件時發生錯誤，請稍後再試或檢查網路連線。', '⚠️ 寄送失敗');
+        } finally {
+          btn.disabled = false;
+          btn.innerText = originalText;
+        }
+      });
+
+      document.getElementById('btnRetest').onclick = () => {
+        state.testType = '複測評量';
+        state.isRetestLocked = true;
+        state.answers = {};
+        prevEatenCount = 0;
+
+        renderTestTypes();
+        renderQuestions();
+        updateProgress();
+        updateScoreDisplay();
+
+        const stageModal = document.getElementById('stageClearModal');
+        stageModal.classList.add('hidden');
+        stageModal.classList.remove('flex');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      // Initial Render
+      renderProjectOptions();
+      renderTitleRoles();
+      renderTestTypes();
+      renderQuestions();
+      updateProgress();
+      updateScoreDisplay();
+    };
+  </script>
+</body>
+</html>
